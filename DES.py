@@ -16,7 +16,7 @@ def permute(text, permutation_table):
     return permuted_text
 
 plainText = "subagdja"
-key = "13 34 57 79 9B BC DF F1"
+key = "FF 0A 02 FF FF FF 01 A1"
 l = []
 r = []
 c = []
@@ -199,14 +199,13 @@ for index, rotation in enumerate(perputaran_bit):
     # Tambahkan hasil rotasi ke dalam list
     c.append(c_new)
     d.append(d_new)
-    cd.append(c_new + d_new)
-
-print("Biar tau panjang : ", len(cd))
+    cd.append(c_new +  d_new)
 
 for i in range(0, 17):
-    print("CD[", i, "]", cd[i])
+    print("CD[]",  c[i], d[i], sep=", ")
+    # print("CD[", i, "]", cd[i])
 
-print("Hasil Permutasi PC-2")
+print("\nHasil Permutasi PC-2")
 
 k = []
 k.append(permute(cd[0], pc2_key_permutation_table))
@@ -214,8 +213,8 @@ k.append(permute(cd[0], pc2_key_permutation_table))
 for i in range(1, 17):
     permuted_plainText_pc2 = permute(cd[i], pc2_key_permutation_table)
     k.append(permuted_plainText_pc2)  # Simpan nilai K hasil permutasi PC-2
-    print("CD :", cd[i])
-    print("K-", i, ":", k[i], "Len", len(k[i]))
+    print("CD[", i, "] : ", cd[i], sep="")
+    print("K[", i, "]  : ", k[i], sep="")
 
 print("\n#Langkah 5")
 
@@ -252,20 +251,20 @@ for i in range(1, 17):
     xor_result = ''.join(str(int(p_bit) ^ int(l_bit)) for p_bit, l_bit in zip(p[i], l[i]))
     r.append(xor_result)
 
-    print("\ne[{}]: {}".format(i, e[i]))
-    print("k[{}]: {}".format(i, k[i]))
-    print("Ai :", a[i])
-    print("Sbox :", b[i])
-    print("P(B) : ", p[i])
-    print("Li : ", l[i])
-    print("Ri:", r[i])
+    print("\nE[{}]: {}".format(i, e[i]))
+    print("K[{}]: {}".format(i, k[i]))
+    print("A[{}]: {}".format(i, a[i]))
+    print("B[{}]: {}".format(i, b[i]))
+    print("P(B)[{}]: {}".format(i, p[i]))
+    print("L[{}]: {}".format(i, l[i]))
+    print("R[{}]: {}".format(i, r[i]))
 
 print("\nFinal L dan R :")
-print("L-16 :", r[15])
-print("R-16 :", r[16])
+print("L[16] :", r[15])
+print("R[16] :", r[16])
 
 rl = r[16] + r[15]
-print("RL Adalah : ", rl)
+print("R[16]L[16] Adalah : ", rl)
 
 cipher = permute(rl, ip_inverse_permutation_table)
 print("Hasil Akhir Adalah : ", cipher)
