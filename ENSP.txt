@@ -1,0 +1,4 @@
+system-view
+system GigabitEthernet 0/0/0
+ip address 172.16.100.255 24
+service-manager all permit
